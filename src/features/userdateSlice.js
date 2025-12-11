@@ -218,6 +218,13 @@ export const userDate = createSlice({
     users: [],
     loading: false,
     error: null,
+    searchData: []
+
+  },
+  reducers: {
+    searchData: (state, action) => {
+      state.searchData = action.payload
+    }
   },
 
   extraReducers: (builder) => {
@@ -265,3 +272,6 @@ export const userDate = createSlice({
 });
 
 export default userDate.reducer;
+
+export const { searchData } = userDate.actions;
+

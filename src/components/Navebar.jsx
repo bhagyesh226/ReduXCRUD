@@ -1,9 +1,15 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router'
+import { searchData } from '../features/userdateSlice';
 
 const Navebar = () => {
     const count = useSelector((state) => state.app.users.length);
+    const [searchuser, setSearchuser] = React.useState('');
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(searchData(searchuser))
+    }, [searchuser])
     return (
         <div>
             <nav className='border-b shadow-2xl p-4 flex justify-between'>
@@ -16,13 +22,13 @@ const Navebar = () => {
                                 <Link to='/'>Add User</Link>
                             </div>
                             <div className='text-zinc-500 hover:text-zinc-600 hover:border-b-2 border-zinc-600 tranltion-all duration-300'>
-                                 <Link to='/ShowAll'>Show All User({count})</Link>
+                                <Link to='/ShowAll'>Show All User({count})</Link>
                             </div>
                         </div>
                     </div>
                     {/* left side  */}
                     <div>
-                        <input type="search" placeholder='search...' className=' p-2 rounded-2xl bg-zinc-200'/>
+                        <input type="search" placeholder='search...' onChange={(e) => setSearchuser(e.target.value)} className=' p-2 rounded-2xl bg-zinc-200' />
                     </div>
                 </div>
             </nav>
